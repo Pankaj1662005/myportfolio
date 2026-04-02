@@ -9,7 +9,4 @@ export default defineConfig({
       "@": "/src"
     }
   },
-  optimizeDeps: {
-    exclude: ["bippy/dist/jsx-runtime", "bippy/dist/jsx-dev-runtime"]
-  }
 });
