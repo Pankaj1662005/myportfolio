@@ -1,46 +1,66 @@
 import React from "react";
 
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  padding: "12px 14px",
+  borderRadius: "10px",
+  background: "rgba(255,255,255,0.04)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  color: "#f0f0f4",
+  fontSize: "0.88rem",
+  outline: "none",
+  transition: "border-color 0.2s, box-shadow 0.2s",
+};
+
 export default function Contact() {
   return (
-    <section className="mb-16 mt-6">
-      <h2 className="text-3xl font-extrabold tracking-tight mb-3">Contact</h2>
-      <div className="w-14 h-1 bg-[#e1a27a] mb-6 rounded-full" />
-      <div className="mb-8 max-w-xl text-lg text-[#cccccc] mx-auto">
-        Let's connect! Feel free to reach out for collaborations, consulting, or project opportunities—I will reply quickly.
-      </div>
+    <section style={{ marginBottom: "4rem" }}>
+      <h2 style={{ marginBottom: "8px" }}>Contact</h2>
+      <div style={{
+        width: "48px", height: "3px",
+        background: "linear-gradient(90deg, #7b6cff, #e1a27a)",
+        borderRadius: "2px", marginBottom: "20px"
+      }} />
 
-      {/* Formspree Form */}
+      <p style={{ color: "#aaa", marginBottom: "28px", fontSize: "0.92rem", maxWidth: "480px" }}>
+        Let's connect! Feel free to reach out for collaborations, consulting, or project opportunities — I'll reply quickly.
+      </p>
+
       <form
         action="https://formspree.io/f/xeognrnj"
         method="POST"
-        className="max-w-xl bg-[#232325] p-10 rounded-2xl shadow-md mx-auto flex flex-col gap-6"
+        className="glass-card"
+        style={{ maxWidth: "520px", padding: "28px", display: "flex", flexDirection: "column", gap: "16px" }}
       >
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          required
-          className="rounded-lg p-3 bg-[#1b1b1c] border-none text-white placeholder:text-[#aaaaaa] focus:ring-2 focus:ring-[#e1a27a]"
+        <input type="text" name="name" placeholder="Your Name" required style={inputStyle}
+          onFocus={e => { e.target.style.borderColor = "rgba(123,108,255,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(123,108,255,0.1)"; }}
+          onBlur={e => { e.target.style.borderColor = "rgba(255,255,255,0.08)"; e.target.style.boxShadow = "none"; }}
         />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          required
-          className="rounded-lg p-3 bg-[#1b1b1c] border-none text-white placeholder:text-[#aaaaaa] focus:ring-2 focus:ring-[#e1a27a]"
+        <input type="email" name="email" placeholder="Your Email" required style={inputStyle}
+          onFocus={e => { e.target.style.borderColor = "rgba(123,108,255,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(123,108,255,0.1)"; }}
+          onBlur={e => { e.target.style.borderColor = "rgba(255,255,255,0.08)"; e.target.style.boxShadow = "none"; }}
         />
-        <textarea
-          name="message"
-          placeholder="Message"
-          required
-          rows={5}
-          className="rounded-lg p-3 bg-[#1b1b1c] border-none text-white placeholder:text-[#aaaaaa] focus:ring-2 focus:ring-[#e1a27a]"
+        <textarea name="message" placeholder="Your Message" required rows={5}
+          style={{ ...inputStyle, resize: "vertical" }}
+          onFocus={e => { e.currentTarget.style.borderColor = "rgba(123,108,255,0.5)"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(123,108,255,0.1)"; }}
+          onBlur={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.boxShadow = "none"; }}
         />
-        <button
-          type="submit"
-          className="rounded-xl bg-[#e1a27a] text-[#232325] font-bold py-3 hover:bg-[#cf8b5e] transition-colors duration-150"
+        <button type="submit" style={{
+          padding: "12px",
+          borderRadius: "10px",
+          border: "none",
+          background: "linear-gradient(135deg, #7b6cff, #e1a27a)",
+          color: "#fff",
+          fontWeight: 700,
+          fontSize: "0.9rem",
+          cursor: "pointer",
+          transition: "opacity 0.2s, transform 0.2s",
+          letterSpacing: "0.02em",
+        }}
+          onMouseOver={e => { e.currentTarget.style.opacity = "0.88"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+          onMouseOut={e => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateY(0)"; }}
         >
-          Send message
+          Send Message →
         </button>
       </form>
     </section>
