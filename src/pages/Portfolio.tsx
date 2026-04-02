@@ -1,30 +1,33 @@
 import React from "react";
 
 const projects = [
-  {
-    img: "/skill-port.jpg", title: "Skill-Port", type: "Mobile App — college students & professors", period: "Present (Major project)",
-    desc: "A platform where students apply to internships posted by professors. Features email verification, club joining, streak tracking, student profiles, and in-app reporting.",
-    tech: ["Firebase", "Authentication", "Real-time DB", "UI/UX"],
-    href: "https://github.com/Pankaj1662005/Internshala-User"
-  },
+
   {
     img: "https://cdn.mos.cms.futurecdn.net/gbprbdRLGbT5KeTsq6pT9f-1200-80.jpg", title: "Aura Brain", type: "Capstone — hardware/software integration", period: "Present",
     desc: "Wearable voice-based assistant powered by ESP32. Sends audio data wirelessly to phone, integrated with Aura chatbot for daily Q&A and conversation summaries.",
     tech: ["ESP32", "Bluetooth", "Voice AI", "Firebase", "Arduino"],
-    href: "https://github.com/Pankaj1662005/world10"
+    href: "https://github.com/Pankaj1662005/DeepLogix"
   },
   {
-    img: "https://static.vecteezy.com/system/resources/thumbnails/024/295/098/small_2x/music-notes-background-illustration-ai-generative-free-photo.jpg",
-    title: "GO Tunes", type: "Flutter Music Player", period: "2025",
-    desc: "Ad-free music player with offline liked songs, shuffle, repeat modes, and a smooth Material Dark UI.",
-    tech: ["Flutter", "Provider", "AudioPlayers", "Cache Manager"],
-    href: "https://github.com/Pankaj1662005/Go-tunes"
+    img: "https://m.media-amazon.com/images/I/610jFSCw0CL._UF894,1000_QL80_.jpg",
+    title: "Try Hack me",
+    type: "Educational Mobile Application about Flutter Permissions",
+    period: "Jan 2025",
+    desc: "This app was built purely for educational purposes to explore how permissions work in Flutter. The app fetches and uploads contacts, accesses the device's DCIM directory, and opens a WebView with Instagram. It also captures live images via the camera in the background using service handlers.",
+    tech: ["Flutter", "Permissions Handling", "Firebase (Firestore & Storage)", "Camera Integration", "Background Services", "WebView", "Contacts API"],
+    href: "https://github.com/Pankaj1662005/Hack-App"
   },
   {
     img: "/ai.jpg", title: "AURA Chatbot", type: "Offline Chatbot using LLMs", period: "February 2025",
     desc: "Interactive offline chatbot using Falcon-7B-Instruct via Hugging Face Transformers with contextual memory.",
     tech: ["Falcon-7B", "Transformers", "Python", "Hugging Face"],
     href: "https://github.com/Pankaj1662005/AURA-chatbot"
+  },
+  {
+    img: "/skill-port.jpg", title: "Skill-Port", type: "Mobile App — college students & professors", period: "Present (Major project)",
+    desc: "A platform where students apply to internships posted by professors. Features email verification, club joining, streak tracking, student profiles, and in-app reporting.",
+    tech: ["Firebase", "Authentication", "Real-time DB", "UI/UX"],
+    href: "https://github.com/Pankaj1662005/Internshala-User"
   },
   {
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQayQuUkQCIf9i3kdrsBg1UKAXF3OB2PX0JkQ&s",
@@ -49,7 +52,7 @@ const projects = [
     img: "/avtar.jpg", title: "Portfolio Website", type: "Personal Portfolio", period: "March 2023",
     desc: "A personal portfolio website showcasing projects, skills, and experience.",
     tech: ["React", "Next.js", "Tailwind CSS"],
-    href: "https://github.com/Pankaj1662005/portfolio2"
+    href: "https://github.com/Pankaj1662005/myportfolio"
   }
 ];
 
