@@ -1,6 +1,6 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Outlet, Link } from "react-router-dom";
-import { Github, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import { BrowserRouter as Router, Routes, Route, Outlet, Link, useLocation } from "react-router-dom";
+import { Github, Linkedin, Twitter, Mail, MapPin } from "lucide-react";
 import "./index.css";
 import About from "./pages/About";
 import Resume from "./pages/Resume";
@@ -9,21 +9,9 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 
 const socialLinks = [
-  {
-    href: "https://www.linkedin.com/in/pankaj-sheokand/",
-    icon: <Linkedin size={18} />,
-    label: "LinkedIn",
-  },
-  {
-    href: "https://github.com/Pankaj1662005",
-    icon: <Github size={18} />,
-    label: "GitHub",
-  },
-  {
-    href: "https://x.com/Shokeen__singh",
-    icon: <Twitter size={18} />,
-    label: "Twitter",
-  },
+  { href: "https://www.linkedin.com/in/pankaj-sheokand/", icon: <Linkedin size={17} />, label: "LinkedIn" },
+  { href: "https://github.com/Pankaj1662005", icon: <Github size={17} />, label: "GitHub" },
+  { href: "https://x.com/Shokeen__singh", icon: <Twitter size={17} />, label: "Twitter" },
 ];
 
 const navLinks = [
@@ -33,75 +21,130 @@ const navLinks = [
   { name: "Contact", to: "/contact" },
 ];
 
-function Layout() {
-  const profileImages = ["/3d.gif"," /mypic.jpg"];
-  const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
+// 3D Tilt effect on the sidebar card
+function useTilt(ref: React.RefObject<HTMLDivElement>) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 14;
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * -14;
+      el.style.transform = `perspective(900px) rotateY(${x}deg) rotateX(${y}deg) scale3d(1.025,1.025,1.025)`;
+    };
+    const onLeave = () => {
+      el.style.transform = "perspective(900px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)";
+    };
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    return () => { el.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
+  }, []);
+}
+
+function FloatingOrbs() {
+  return (
+    <div style={{ position: "fixed", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 0 }}>
+      <div className="orb orb1" />
+      <div className="orb orb2" />
+      <div className="orb orb3" />
+      <div className="grid-bg" />
+    </div>
+  );
+}
+
+function Sidebar() {
+  const cardRef = useRef<HTMLDivElement>(null);
+  useTilt(cardRef);
+  const profileImages = ["/3d.gif", "/mypic.jpg"];
+  const img = profileImages[Math.floor(Math.random() * profileImages.length)];
 
   return (
-    <div className="min-h-screen w-full bg-[#1b1b1c] flex flex-col md:flex-row font-poppins text-white">
-      {/* Sidebar */}
-      <aside className="w-full md:w-80 lg:w-96 md:max-w-[360px] md:min-h-screen px-6 py-8 bg-[#232325] flex flex-col items-center rounded-xl m-3 md:ml-5 shadow-xl">
-        <div className="flex flex-col items-center w-full">
-          <img
-            src={randomImage}
-            alt="Profile"
-            className="rounded-2xl h-36 w-36 my-2 object-cover border-2 border-[#e1a27a] shadow-md bg-[#29292b]"
-          />
-          <h1 className="mt-4 text-2xl font-bold tracking-tight text-white">Pankaj Sheokand</h1>
-          <span className="bg-[#2a2a2d] my-2 px-4 py-1 text-sm rounded-lg inline-block">Engineering Student</span>
-          <div className="flex flex-wrap justify-center gap-2 mt-4">
-  {["Tiet-26", "Computer Science", "Data Science Specialization"].map((tag) => (
-    <span
-      key={tag}
-      className="bg-[#2e2e30] text-[#e1a27a] text-xs font-semibold tracking-wide px-4 py-1 rounded-full border border-[#3c3c3f] shadow-sm"
-    >
-      {tag}
-    </span>
-  ))}
-</div>
+    <aside className="sidebar-outer">
+      <div ref={cardRef} className="sidebar-card">
+        <div className="sidebar-top-glow" />
 
-        </div>
-        <div className="flex flex-col w-full mt-8 gap-3">
-          <div className="flex items-center gap-4 bg-[#232325] p-2 rounded-md">
-            <Mail size={18} className="text-[#e1a27a]" />
-            <a href="mailto:pankajsheof2ys@gmail.com" className="truncate text-sm">pankajsheof2ys@gmail.com</a>
+        {/* Avatar */}
+        <div className="avatar-wrap">
+          <div className="avatar-ring-outer">
+            <img src={img} alt="Pankaj" className="avatar-img" />
           </div>
-          <div className="flex items-center gap-4 bg-[#232325] p-2 rounded-md">
-            <MapPin size={18} className="text-[#e1a27a]" />
-            <span className="truncate text-sm">Jind (126102), Haryana, India</span>
+          <div className="avatar-halo" />
+        </div>
+
+        <h1 className="sidebar-name">Pankaj Sheokand</h1>
+        <span className="sidebar-role">Engineering Student</span>
+
+        <div className="tags-row">
+          {["Tiet-26", "CS", "Data Science"].map(t => (
+            <span key={t} className="tag">{t}</span>
+          ))}
+        </div>
+
+        <div className="divider" />
+
+        <div className="contact-list">
+          <div className="contact-item">
+            <span className="contact-icon"><Mail size={14} /></span>
+            <a href="mailto:pankajsheof2ys@gmail.com" className="contact-text">pankajsheof2ys@gmail.com</a>
+          </div>
+          <div className="contact-item">
+            <span className="contact-icon"><MapPin size={14} /></span>
+            <span className="contact-text">Jind, Haryana, India</span>
           </div>
         </div>
-        <div className="flex flex-row gap-4 mt-8">
+
+        <div className="divider" />
+
+        <div className="socials-row">
           {socialLinks.map(({ href, icon, label }) => (
-            <a
-              key={label}
-              href={href}
-              aria-label={label}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#e1a27a]"
-            >
+            <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="social-btn">
               {icon}
             </a>
           ))}
         </div>
-      </aside>
-      {/* Main content area */}
-      <main className="flex-grow flex flex-col p-4 md:p-10 lg:px-16 xl:px-32 mx-auto bg-[#1b1b1c] text-white min-w-0">
-        {/* Nav Bar */}
-        <nav className="flex flex-wrap gap-1 md:gap-6 justify-start mb-10">
-          {navLinks.map(({ name, to }) => (
-            <Link
-              key={name}
-              to={to}
-              className="px-4 py-2 rounded-xl text-base font-medium hover:text-[#e1a27a] focus:text-[#e1a27a] transition-colors duration-150"
-            >
-              {name}
-            </Link>
-          ))}
-        </nav>
-        <Outlet />
-      </main>
+
+        <div className="status-chip">
+          <span className="status-dot" /> Open to Work
+        </div>
+
+        {/* 3D decorative corner gems */}
+        <div className="corner-gem gem-tl" />
+        <div className="corner-gem gem-br" />
+      </div>
+    </aside>
+  );
+}
+
+function NavBar() {
+  const location = useLocation();
+  return (
+    <nav className="topnav">
+      {navLinks.map(({ name, to }) => {
+        const active = to === "/" ? location.pathname === "/" : location.pathname.startsWith(to);
+        return (
+          <Link key={name} to={to} className={`nav-link ${active ? "nav-active" : ""}`}>
+            <span className="nav-link-text">{name}</span>
+            {active && <span className="nav-underline" />}
+          </Link>
+        );
+      })}
+    </nav>
+  );
+}
+
+function Layout() {
+  return (
+    <div className="root-wrap">
+      <FloatingOrbs />
+      <div className="layout-inner">
+        <Sidebar />
+        <main className="main-panel">
+          <NavBar />
+          <div className="page-wrap">
+            <Outlet />
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
