@@ -23,6 +23,7 @@
     "jsx": "react-jsx",
     "strict": true,
     "noFallthroughCasesInSwitch": true,
+    "jsxImportSource": "bippy/dist"
   },
   "include": [
     "src",

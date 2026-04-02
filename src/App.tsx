@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route, Outlet, Link, useLocation } from "react-router-dom";
 import { Github, Linkedin, Twitter, Mail, MapPin } from "lucide-react";
 import "./index.css";
-import ThreeBackground from "./ThreeBackground";   // <-- NEW
 import About from "./pages/About";
 import Resume from "./pages/Resume";
 import Portfolio from "./pages/Portfolio";
@@ -14,6 +13,7 @@ const socialLinks = [
   { href: "https://github.com/Pankaj1662005", icon: <Github size={17} />, label: "GitHub" },
   { href: "https://x.com/Shokeen__singh", icon: <Twitter size={17} />, label: "Twitter" },
 ];
+
 const navLinks = [
   { name: "About", to: "/" },
   { name: "Resume", to: "/resume" },
@@ -21,6 +21,7 @@ const navLinks = [
   { name: "Contact", to: "/contact" },
 ];
 
+// 3D Tilt effect on the sidebar card
 function useTilt(ref: React.RefObject<HTMLDivElement>) {
   useEffect(() => {
     const el = ref.current;
@@ -31,11 +32,24 @@ function useTilt(ref: React.RefObject<HTMLDivElement>) {
       const y = ((e.clientY - rect.top) / rect.height - 0.5) * -14;
       el.style.transform = `perspective(900px) rotateY(${x}deg) rotateX(${y}deg) scale3d(1.025,1.025,1.025)`;
     };
-    const onLeave = () => { el.style.transform = "perspective(900px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)"; };
+    const onLeave = () => {
+      el.style.transform = "perspective(900px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)";
+    };
     el.addEventListener("mousemove", onMove);
     el.addEventListener("mouseleave", onLeave);
     return () => { el.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
   }, []);
+}
+
+function FloatingOrbs() {
+  return (
+    <div style={{ position: "fixed", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 0 }}>
+      <div className="orb orb1" />
+      <div className="orb orb2" />
+      <div className="orb orb3" />
+      <div className="grid-bg" />
+    </div>
+  );
 }
 
 function Sidebar() {
@@ -43,22 +57,31 @@ function Sidebar() {
   useTilt(cardRef);
   const profileImages = ["/3d.gif", "/mypic.jpg"];
   const img = profileImages[Math.floor(Math.random() * profileImages.length)];
+
   return (
     <aside className="sidebar-outer">
       <div ref={cardRef} className="sidebar-card">
         <div className="sidebar-top-glow" />
+
+        {/* Avatar */}
         <div className="avatar-wrap">
           <div className="avatar-ring-outer">
             <img src={img} alt="Pankaj" className="avatar-img" />
           </div>
           <div className="avatar-halo" />
         </div>
+
         <h1 className="sidebar-name">Pankaj Sheokand</h1>
         <span className="sidebar-role">Engineering Student</span>
+
         <div className="tags-row">
-          {["Tiet-26", "CS", "Data Science"].map(t => <span key={t} className="tag">{t}</span>)}
+          {["Tiet-26", "CS", "Data Science"].map(t => (
+            <span key={t} className="tag">{t}</span>
+          ))}
         </div>
+
         <div className="divider" />
+
         <div className="contact-list">
           <div className="contact-item">
             <span className="contact-icon"><Mail size={14} /></span>
@@ -69,13 +92,22 @@ function Sidebar() {
             <span className="contact-text">Jind, Haryana, India</span>
           </div>
         </div>
+
         <div className="divider" />
+
         <div className="socials-row">
           {socialLinks.map(({ href, icon, label }) => (
-            <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="social-btn">{icon}</a>
+            <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="social-btn">
+              {icon}
+            </a>
           ))}
         </div>
-        <div className="status-chip"><span className="status-dot" /> Open to Work</div>
+
+        <div className="status-chip">
+          <span className="status-dot" /> Open to Work
+        </div>
+
+        {/* 3D decorative corner gems */}
         <div className="corner-gem gem-tl" />
         <div className="corner-gem gem-br" />
       </div>
@@ -103,12 +135,14 @@ function NavBar() {
 function Layout() {
   return (
     <div className="root-wrap">
-      <ThreeBackground />      {/* ← replaces FloatingOrbs */}
+      <FloatingOrbs />
       <div className="layout-inner">
         <Sidebar />
         <main className="main-panel">
           <NavBar />
-          <div className="page-wrap"><Outlet /></div>
+          <div className="page-wrap">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>
