@@ -38,9 +38,9 @@ function Layout() {
   const randomImage = profileImages[Math.floor(Math.random() * profileImages.length)];
 
   return (
-    <div className="min-h-screen w-full bg-[#1b1b1c] flex font-poppins text-white">
+    <div className="min-h-screen w-full bg-[#1b1b1c] flex flex-col md:flex-row font-poppins text-white">
       {/* Sidebar */}
-      <aside className="w-full md:w-80 lg:w-96 max-w-[360px] min-h-screen px-6 py-8 bg-[#232325] flex flex-col items-center rounded-xl m-3 md:ml-5 shadow-xl">
+      <aside className="w-full md:w-80 lg:w-96 md:max-w-[360px] md:min-h-screen px-6 py-8 bg-[#232325] flex flex-col items-center rounded-xl m-3 md:ml-5 shadow-xl">
         <div className="flex flex-col items-center w-full">
           <img
             src={randomImage}
@@ -87,9 +87,9 @@ function Layout() {
         </div>
       </aside>
       {/* Main content area */}
-      <main className="flex-grow flex flex-col p-4 md:p-10 lg:px-16 xl:px-32 mx-auto">
+      <main className="flex-grow flex flex-col p-4 md:p-10 lg:px-16 xl:px-32 mx-auto bg-[#1b1b1c] text-white min-w-0">
         {/* Nav Bar */}
-        <nav className="flex gap-1 md:gap-6 justify-end md:justify-start mb-10">
+        <nav className="flex flex-wrap gap-1 md:gap-6 justify-start mb-10">
           {navLinks.map(({ name, to }) => (
             <Link
               key={name}
