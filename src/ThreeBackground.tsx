@@ -326,7 +326,7 @@ export default function ThreeBackground() {
 
     // ── Resize ─────────────────────────────────────────────
     function onResize() {
-      if (!mount) return;              ✅ ADD THIS LINE
+      if (!mount) return;          
       const w = mount.clientWidth, h = mount.clientHeight;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
