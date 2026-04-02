@@ -1,40 +1,41 @@
 import React from "react";
 
 const skills = [
-  "Data Structure and Algorithms",
-  "Flutter App Development",
-  "Unity game engine",
-  "GitHub Expert",
-  "Kotlin Expert",
-  "Firebase Expert",
-  "Android SDK Expert",
-  "Android Studio Expert",
-  "Communication skills",
-  "SQL",
-  "Data Science",
-  "Machine learning"
+  "Data Structures & Algorithms", "Flutter App Development", "Unity Game Engine",
+  "GitHub Expert", "Kotlin", "Firebase", "Android SDK", "Android Studio",
+  "Communication Skills", "SQL", "Data Science", "Machine Learning"
 ];
 
 export default function About() {
   return (
-    <section className="mb-16">
-      <h2 className="text-3xl font-extrabold tracking-tight mb-3">About Me</h2>
-      <div className="w-14 h-1 bg-[#e1a27a] mb-4 rounded-full" />
-      <div className="max-w-2xl text-lg text-[#cccccc] mb-6">
+    <section style={{ marginBottom: "4rem" }}>
+      <h2 style={{ marginBottom: "8px" }}>About Me</h2>
+      <div style={{
+        width: "48px", height: "3px",
+        background: "linear-gradient(90deg, #7b6cff, #e1a27a)",
+        borderRadius: "2px", marginBottom: "20px"
+      }} />
+
+      <div className="glass-card" style={{ padding: "24px 28px", marginBottom: "28px", color: "#ccc", lineHeight: 1.75, fontSize: "0.95rem" }}>
         <p>
-          I am Pankaj Sheokand, a passionate engineering student well-versed in data structures & algorithms, app and game development, and modern technologies. I bring hands-on experience building robust mobile apps, cloud-based services, and smart systems driven by machine learning and data science. Whether it is product design, scalable backends, or end-to-end UI/UX, my skills enable me to deliver high-quality and innovative solutions for real-world problems.
+          I am <strong style={{ color: "#f0f0f4" }}>Pankaj Sheokand</strong>, a passionate engineering student well-versed in data structures &amp; algorithms, app and game development, and modern technologies. I bring hands-on experience building robust mobile apps, cloud-based services, and smart systems driven by machine learning and data science.
         </p>
-        <p className="mt-4">
-          Looking for a driven developer with a knack for both software and systems? Let’s connect—together we’ll turn ideas into impact.
+        <p style={{ marginTop: "14px" }}>
+          Looking for a driven developer with a knack for both software and systems? Let's connect—together we'll turn ideas into impact.
         </p>
       </div>
-      <h3 className="text-2xl font-bold mt-12 mb-4">Skills</h3>
-      <div className="flex flex-wrap gap-4 items-center">
+
+      <h3 style={{ fontSize: "1.25rem", marginBottom: "16px" }}>Skills</h3>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
         {skills.map((skill) => (
-          <div
-            key={skill}
-            className="bg-[#232325] rounded-2xl px-4 py-2 text-base text-[#e1a27a] font-semibold shadow-sm"
-          >
+          <div key={skill} className="glass-card" style={{
+            padding: "8px 16px",
+            fontSize: "0.82rem",
+            color: "#e1a27a",
+            fontWeight: 600,
+            borderRadius: "100px",
+            cursor: "default",
+          }}>
             {skill}
           </div>
         ))}
