@@ -73,7 +73,7 @@ export default function Portfolio() {
     "WebView",
     "Contacts API"
   ],
-  href: "https://github.com/YourUsername/FlutterPermissionsDemo"
+  href: "https://github.com/Pankaj1662005/Hack-App"
 },
 
     {
@@ -92,7 +92,7 @@ export default function Portfolio() {
       period: "March 2023",
       desc: "A personal portfolio website to showcase my projects, skills, and experience.",
       tech: ["React", "Next.js", "Tailwind CSS", "Vercel"],
-      href: "https://github.com/Pankaj1662005/portfolio2"
+      href: "https://github.com/Pankaj1662005/myportfolio"
     }
   ];
 
